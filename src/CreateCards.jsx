@@ -33,12 +33,13 @@ function CreateCards(props) {
 
   return (
     <div>
-      <CreateModal
-        open={open}
-        close={handleClose}
-        currentCard={currentCard}
-        isLoading={isLoading}
-      />
+      {currentCard && (
+        <CreateModal
+          open={open}
+          close={handleClose}
+          currentCard={currentCard}
+        />
+      )}
       <ImageList cols={1} sx={{ width: "75%", height: 450 }}>
         <ImageListItem key="Subheader">
           <ListSubheader component="div">Cards</ListSubheader>

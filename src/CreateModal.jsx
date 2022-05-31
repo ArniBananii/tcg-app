@@ -14,8 +14,8 @@ import LoadingButton from "@mui/lab/LoadingButton";
 import { Link } from "react-router-dom";
 
 function CreateModal(props) {
-  const { currentCard, open, close, isLoading } = props; //! isLoading has no function yet....
-  console.log("isLoading", isLoading);
+  const { currentCard, open, close } = props; //! isLoading has no function yet....
+
   const style = {
     position: "absolute",
     maxWidth: "400px",
@@ -89,37 +89,39 @@ function CreateModal(props) {
               </Grid>
             </Grid>
             <Typography color="text.secondary" variant="body2">
-              {currentCard == undefined ? (
+              {/* {currentCard == undefined ? (
                 <LoadingButton
                   loading
                   loadingIndicator="Loading..."
                   variant="outline"
                 ></LoadingButton>
-              ) : (
-                currentCard.originalText
-              )}
+              ) : ( */}
+              {currentCard.originalText}
+              {/* )} */}
             </Typography>
           </Box>
           <Divider variant="middle" />
           <Box sx={{ m: 2 }}>
-            <Typography gutterBottom variant="body1">
-              Select type
-            </Typography>
-            <Stack direction="row" spacing={4}>
+            {/* <Stack direction="row" spacing={4}>
               //TODO: check why Loadingbutton is not showing while first render!
               <Chip label="Extra Soft" />
               <Chip color="primary" label="Soft" />
               <Chip label="Medium" />
               <Chip label="Hard" />
-            </Stack>
+            </Stack> */}
           </Box>
           <Box sx={{ mt: 3, ml: 1, mb: 1 }}>
             {currentCard == undefined ? (
               <p>...Loading...</p>
             ) : (
-              <Link to={`${currentCard.name}`}>
-                <Button>Learn more</Button> //! Change when loading state is
-                handled
+              <Link
+                to={`${currentCard.name}`}
+                state={{
+                  data: currentCard,
+                }}
+              >
+                <Button>Learn more</Button> //TODO: Change when loading state is
+                handled?
               </Link>
             )}
           </Box>

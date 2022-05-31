@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import CreateModal from "./CreateModal";
+
 import { Button, ButtonGroup } from "@mui/material";
 import "./style/CreateCards.css";
 import useFetch from "./util/useFetch";
