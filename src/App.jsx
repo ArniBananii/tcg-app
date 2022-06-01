@@ -7,21 +7,26 @@ import Home from "./views/Home";
 import About from "./views/About";
 import Nav from "./components/Nav";
 import Detail from "./views/Detail";
+import { FavoriteContextProvider } from "./components/FavoriteContext";
 
 function App() {
   return (
     <div className="App">
       <AuthContextProvider>
-        <BrowserRouter>
-          <Nav />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="about" element={<About />}></Route>
-            <Route path="cardList" element={<CreateList />}></Route>
-            <Route path="cardList/:name" element={<Detail />}></Route>
-            <Route path="*" element={<Home />}></Route>
-          </Routes>
-        </BrowserRouter>
+        <FavoriteContextProvider>
+          <BrowserRouter>
+            <Nav />
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="about" element={<About />}></Route>
+
+              <Route path="cardList" element={<CreateList />}></Route>
+              <Route path="cardList/:name" element={<Detail />}></Route>
+
+              <Route path="*" element={<Home />}></Route>
+            </Routes>
+          </BrowserRouter>
+        </FavoriteContextProvider>
       </AuthContextProvider>
     </div>
   );

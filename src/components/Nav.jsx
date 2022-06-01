@@ -21,7 +21,7 @@ function Nav() {
           variant={user == null ? "primary" : "danger"}
           onClick={user == null ? login : logout}
         >
-          {user == null ? "Login" : "logout"}
+          Login
         </Button>
       </nav>
     </div>

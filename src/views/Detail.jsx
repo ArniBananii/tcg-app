@@ -15,7 +15,7 @@ function Detail() {
   return (
     <div>
       <p>{name}</p>
-      <img src={data.imageUrl} alt="" />
+      <img src={data.imageUrl} alt="#" />
     </div>
   );
 }

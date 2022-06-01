@@ -8,14 +8,17 @@ import {
   Stack,
 } from "@mui/material";
 
-import React from "react";
+import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Link } from "react-router-dom";
 
+import { FavoriteContext } from "./components/FavoriteContext";
+
 function CreateModal(props) {
   const { currentCard, open, close } = props; //! isLoading has no function yet....
-
+  const { favorite, setFavorite } = useContext(FavoriteContext);
+  console.log("favorite", favorite);
   const style = {
     position: "absolute",
     maxWidth: "400px",
@@ -125,6 +128,13 @@ function CreateModal(props) {
               </Link>
             )}
           </Box>
+          <Button
+            onClick={() => {
+              setFavorite([...favorite, currentCard]);
+            }}
+          >
+            I love this card!
+          </Button>
         </Box>
       </Modal>
     </div>

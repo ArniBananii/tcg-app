@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { FavoriteContext } from "../components/FavoriteContext";
 
 function About() {
-  return (
-    <div>About</div>
-  )
+  const { favorite } = useContext(FavoriteContext);
+  return <div>{console.log(favorite)}</div>;
 }
 
-export default About
+export default About;
