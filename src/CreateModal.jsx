@@ -8,17 +8,19 @@ import {
   Stack,
 } from "@mui/material";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { Link } from "react-router-dom";
-
-import { FavoriteContext } from "./components/FavoriteContext";
+import { Link, useNavigate } from "react-router-dom";
+import { FavContext } from "./components/FavContext";
+import { AuthContext } from "./components/AuthContext";
 
 function CreateModal(props) {
   const { currentCard, open, close } = props; //! isLoading has no function yet....
-  const { favorite, setFavorite } = useContext(FavoriteContext);
-  console.log("favorite", favorite);
+  const { favorite, setFavorite, updateFavorite } = useContext(FavContext);
+  const { user } = useContext(AuthContext);
+  const [disable, setDisable] = useState(false);
+  const navigate = useNavigate();
   const style = {
     position: "absolute",
     maxWidth: "400px",
@@ -92,48 +94,37 @@ function CreateModal(props) {
               </Grid>
             </Grid>
             <Typography color="text.secondary" variant="body2">
-              {/* {currentCard == undefined ? (
-                <LoadingButton
-                  loading
-                  loadingIndicator="Loading..."
-                  variant="outline"
-                ></LoadingButton>
-              ) : ( */}
               {currentCard.originalText}
-              {/* )} */}
             </Typography>
           </Box>
           <Divider variant="middle" />
-          <Box sx={{ m: 2 }}>
-            {/* <Stack direction="row" spacing={4}>
-              //TODO: check why Loadingbutton is not showing while first render!
-              <Chip label="Extra Soft" />
-              <Chip color="primary" label="Soft" />
-              <Chip label="Medium" />
-              <Chip label="Hard" />
-            </Stack> */}
-          </Box>
+          <Box sx={{ m: 2 }}></Box>
           <Box sx={{ mt: 3, ml: 1, mb: 1 }}>
             {currentCard == undefined ? (
               <p>...Loading...</p>
             ) : (
               <Link
-                to={`${currentCard.name}`}
+                to={`${currentCard?.name}`}
                 state={{
                   data: currentCard,
                 }}
               >
-                <Button>Learn more</Button> //TODO: Change when loading state is
-                handled?
+                <Button>Learn more</Button>
               </Link>
             )}
           </Box>
           <Button
+            disabled={disable}
             onClick={() => {
-              setFavorite([...favorite, currentCard]);
+              if (!user) {
+                navigate("/login");
+              } else {
+                updateFavorite(currentCard, user?.reloadUserInfo.localId);
+                setDisable(true);
+              }
             }}
           >
-            I love this card!
+            I sure love this card!
           </Button>
         </Box>
       </Modal>

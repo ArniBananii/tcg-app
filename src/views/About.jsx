@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { FavoriteContext } from "../components/FavoriteContext";
+import { FavContext } from "../components/FavContext";
 
 function About() {
-  const { favorite } = useContext(FavoriteContext);
+  const { favorite } = useContext(FavContext);
   return <div>{console.log(favorite)}</div>;
 }
 
